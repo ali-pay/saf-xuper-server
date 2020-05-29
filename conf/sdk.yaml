@@ -1,0 +1,9 @@
+# endorseService Info
+# XuperOS addrs
+endorseServiceHost: "127.0.0.1:37101"
+complianceCheck:
+  complianceCheckEndorseServiceFee: 10
+  complianceCheckEndorseServiceFeeAddr: WwLgfAatHyKx2mCJruRaML4oVf7Chzp42
+  complianceCheckEndorseServiceAddr: ZUjrEbucZYBxF6U7YJKCuSJYbBQewAMWt
+# 加密算法配置, 国密:gm
+crypto: "xchain"
