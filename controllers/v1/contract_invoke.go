@@ -83,7 +83,7 @@ func query(c *gin.Context, req *controllers.Req, wasmContract *contract.WasmCont
 		"msg":  "查询成功",
 		"resp": controllers.Result{
 			Data:    fmt.Sprint(datas),
-			GasUsed: resp.Response.GasUsed,
+			//GasUsed: resp.Response.GasUsed,
 		},
 	})
 }

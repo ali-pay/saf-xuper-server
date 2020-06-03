@@ -39,7 +39,8 @@ func CreateContractAccount(c *gin.Context) {
 		return
 	}
 
-	if req.ContractAccount == "" {
+	//有时候随机数会是0开头，fmt会截断它，所以使用for来跳过不符合长度的数
+	for len(req.ContractAccount) != 16 {
 		//req.ContractAccount = "1234567812345678"
 		req.ContractAccount = fmt.Sprintf("%08v", rand.New(rand.NewSource(time.Now().UnixNano())).Int63n(10000000000000000))
 	}

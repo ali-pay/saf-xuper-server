@@ -1,0 +1,274 @@
+# github.com/astaxie/beego v1.12.1
+github.com/astaxie/beego/logs
+# github.com/btcsuite/btcd v0.0.0-20190824003749-130ea5bddde3
+github.com/btcsuite/btcd/btcec
+# github.com/btcsuite/btcutil v0.0.0-20190425235716-9e5f4b9a998d
+github.com/btcsuite/btcutil/base58
+# github.com/fsnotify/fsnotify v1.4.7
+github.com/fsnotify/fsnotify
+# github.com/gin-contrib/cors v1.3.1
+github.com/gin-contrib/cors
+# github.com/gin-contrib/sse v0.1.0
+github.com/gin-contrib/sse
+# github.com/gin-gonic/gin v1.6.3
+github.com/gin-gonic/gin
+github.com/gin-gonic/gin/binding
+github.com/gin-gonic/gin/internal/bytesconv
+github.com/gin-gonic/gin/internal/json
+github.com/gin-gonic/gin/render
+# github.com/go-playground/locales v0.13.0
+github.com/go-playground/locales
+github.com/go-playground/locales/currency
+# github.com/go-playground/universal-translator v0.17.0
+github.com/go-playground/universal-translator
+# github.com/go-playground/validator/v10 v10.2.0
+github.com/go-playground/validator/v10
+# github.com/go-stack/stack v1.8.0
+github.com/go-stack/stack
+# github.com/gogo/protobuf v1.3.0
+github.com/gogo/protobuf/proto
+# github.com/golang/protobuf v1.3.3
+github.com/golang/protobuf/jsonpb
+github.com/golang/protobuf/proto
+github.com/golang/protobuf/protoc-gen-go/descriptor
+github.com/golang/protobuf/protoc-gen-go/generator
+github.com/golang/protobuf/protoc-gen-go/generator/internal/remap
+github.com/golang/protobuf/protoc-gen-go/plugin
+github.com/golang/protobuf/ptypes
+github.com/golang/protobuf/ptypes/any
+github.com/golang/protobuf/ptypes/duration
+github.com/golang/protobuf/ptypes/struct
+github.com/golang/protobuf/ptypes/timestamp
+github.com/golang/protobuf/ptypes/wrappers
+# github.com/golang/snappy v0.0.0-20180518054509-2e65f85255db
+github.com/golang/snappy
+# github.com/grpc-ecosystem/grpc-gateway v1.9.2
+github.com/grpc-ecosystem/grpc-gateway/internal
+github.com/grpc-ecosystem/grpc-gateway/runtime
+github.com/grpc-ecosystem/grpc-gateway/utilities
+# github.com/hashicorp/hcl v1.0.0
+github.com/hashicorp/hcl
+github.com/hashicorp/hcl/hcl/ast
+github.com/hashicorp/hcl/hcl/parser
+github.com/hashicorp/hcl/hcl/printer
+github.com/hashicorp/hcl/hcl/scanner
+github.com/hashicorp/hcl/hcl/strconv
+github.com/hashicorp/hcl/hcl/token
+github.com/hashicorp/hcl/json/parser
+github.com/hashicorp/hcl/json/scanner
+github.com/hashicorp/hcl/json/token
+# github.com/ipfs/go-ipfs-addr v0.0.1
+github.com/ipfs/go-ipfs-addr
+# github.com/ipfs/go-log v0.0.1
+github.com/ipfs/go-log
+github.com/ipfs/go-log/tracer
+github.com/ipfs/go-log/tracer/wire
+github.com/ipfs/go-log/writer
+# github.com/json-iterator/go v1.1.9
+github.com/json-iterator/go
+# github.com/konsorten/go-windows-terminal-sequences v1.0.1
+github.com/konsorten/go-windows-terminal-sequences
+# github.com/leodido/go-urn v1.2.0
+github.com/leodido/go-urn
+# github.com/lestrrat-go/file-rotatelogs v2.3.0+incompatible
+github.com/lestrrat-go/file-rotatelogs
+github.com/lestrrat-go/file-rotatelogs/internal/option
+# github.com/lestrrat-go/strftime v1.0.1
+github.com/lestrrat-go/strftime
+# github.com/libp2p/go-libp2p-core v0.2.3
+github.com/libp2p/go-libp2p-core/crypto
+github.com/libp2p/go-libp2p-core/crypto/pb
+github.com/libp2p/go-libp2p-core/peer
+github.com/libp2p/go-libp2p-core/peerstore
+# github.com/libp2p/go-libp2p-crypto v0.1.0
+github.com/libp2p/go-libp2p-crypto
+# github.com/libp2p/go-libp2p-peer v0.2.0
+github.com/libp2p/go-libp2p-peer
+# github.com/libp2p/go-libp2p-peerstore v0.1.3
+github.com/libp2p/go-libp2p-peerstore
+# github.com/libp2p/go-openssl v0.0.2
+github.com/libp2p/go-openssl
+github.com/libp2p/go-openssl/utils
+# github.com/magiconair/properties v1.8.0
+github.com/magiconair/properties
+# github.com/mattn/go-colorable v0.1.1
+github.com/mattn/go-colorable
+# github.com/mattn/go-isatty v0.0.12
+github.com/mattn/go-isatty
+# github.com/minio/blake2b-simd v0.0.0-20160723061019-3f5f724cb5b1
+github.com/minio/blake2b-simd
+# github.com/minio/sha256-simd v0.1.1
+github.com/minio/sha256-simd
+# github.com/mitchellh/mapstructure v1.1.2
+github.com/mitchellh/mapstructure
+# github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd
+github.com/modern-go/concurrent
+# github.com/modern-go/reflect2 v1.0.1
+github.com/modern-go/reflect2
+# github.com/mr-tron/base58 v1.1.2
+github.com/mr-tron/base58/base58
+# github.com/multiformats/go-multiaddr v0.1.1
+github.com/multiformats/go-multiaddr
+# github.com/multiformats/go-multihash v0.0.8
+github.com/multiformats/go-multihash
+# github.com/opentracing/opentracing-go v1.0.2
+github.com/opentracing/opentracing-go
+github.com/opentracing/opentracing-go/ext
+github.com/opentracing/opentracing-go/log
+# github.com/patrickmn/go-cache v2.1.0+incompatible
+github.com/patrickmn/go-cache
+# github.com/pelletier/go-toml v1.2.0
+github.com/pelletier/go-toml
+# github.com/pkg/errors v0.9.1
+github.com/pkg/errors
+# github.com/rifflock/lfshook v0.0.0-20180920164130-b9218ef580f5
+github.com/rifflock/lfshook
+# github.com/shiena/ansicolor v0.0.0-20151119151921-a422bbe96644
+github.com/shiena/ansicolor
+# github.com/sirupsen/logrus v1.4.1
+github.com/sirupsen/logrus
+# github.com/spacemonkeygo/spacelog v0.0.0-20180420211403-2296661a0572
+github.com/spacemonkeygo/spacelog
+# github.com/spaolacci/murmur3 v1.1.0
+github.com/spaolacci/murmur3
+# github.com/spf13/afero v1.1.2
+github.com/spf13/afero
+github.com/spf13/afero/mem
+# github.com/spf13/cast v1.3.0
+github.com/spf13/cast
+# github.com/spf13/jwalterweatherman v1.0.0
+github.com/spf13/jwalterweatherman
+# github.com/spf13/pflag v1.0.5
+github.com/spf13/pflag
+# github.com/spf13/viper v1.4.0
+github.com/spf13/viper
+# github.com/syndtr/goleveldb v1.0.0
+github.com/syndtr/goleveldb/leveldb/errors
+github.com/syndtr/goleveldb/leveldb/storage
+github.com/syndtr/goleveldb/leveldb/util
+# github.com/ugorji/go/codec v1.1.7
+github.com/ugorji/go/codec
+# github.com/whyrusleeping/go-logging v0.0.0-20170515211332-0457bb6b88fc
+github.com/whyrusleeping/go-logging
+# github.com/xuperchain/log15 v0.0.0-20190620081506-bc88a9198230
+github.com/xuperchain/log15
+# github.com/xuperchain/xuper-sdk-go v1.0.0 => github.com/xuperchain/xuper-sdk-go v0.0.0-20200407074302-fd8273561271
+github.com/xuperchain/xuper-sdk-go/account
+github.com/xuperchain/xuper-sdk-go/common
+github.com/xuperchain/xuper-sdk-go/config
+github.com/xuperchain/xuper-sdk-go/contract
+github.com/xuperchain/xuper-sdk-go/crypto
+github.com/xuperchain/xuper-sdk-go/transfer
+github.com/xuperchain/xuper-sdk-go/xchain
+# github.com/xuperchain/xuperchain v0.0.0-20200508112010-eeb1f81b4b45
+github.com/xuperchain/xuperchain/core/common
+github.com/xuperchain/xuperchain/core/common/config
+github.com/xuperchain/xuperchain/core/common/log
+github.com/xuperchain/xuperchain/core/crypto/account
+github.com/xuperchain/xuperchain/core/crypto/aes/ecb
+github.com/xuperchain/xuperchain/core/crypto/aes/padding
+github.com/xuperchain/xuperchain/core/crypto/client
+github.com/xuperchain/xuperchain/core/crypto/client/base
+github.com/xuperchain/xuperchain/core/crypto/client/gm/gmclient
+github.com/xuperchain/xuperchain/core/crypto/client/gm/gmsm/multisign
+github.com/xuperchain/xuperchain/core/crypto/client/gm/gmsm/schnorr_ring_sign
+github.com/xuperchain/xuperchain/core/crypto/client/gm/gmsm/schnorr_sign
+github.com/xuperchain/xuperchain/core/crypto/client/gm/gmsm/signature
+github.com/xuperchain/xuperchain/core/crypto/client/gm/gmsm/sm2
+github.com/xuperchain/xuperchain/core/crypto/client/gm/gmsm/sm3
+github.com/xuperchain/xuperchain/core/crypto/client/gm/gmsm/sm4
+github.com/xuperchain/xuperchain/core/crypto/client/xchain
+github.com/xuperchain/xuperchain/core/crypto/common
+github.com/xuperchain/xuperchain/core/crypto/config
+github.com/xuperchain/xuperchain/core/crypto/ecies
+github.com/xuperchain/xuperchain/core/crypto/ecies/libecies
+github.com/xuperchain/xuperchain/core/crypto/hash
+github.com/xuperchain/xuperchain/core/crypto/multisign
+github.com/xuperchain/xuperchain/core/crypto/sign
+github.com/xuperchain/xuperchain/core/crypto/utils
+github.com/xuperchain/xuperchain/core/global
+github.com/xuperchain/xuperchain/core/hdwallet/api
+github.com/xuperchain/xuperchain/core/hdwallet/config
+github.com/xuperchain/xuperchain/core/hdwallet/error
+github.com/xuperchain/xuperchain/core/hdwallet/key
+github.com/xuperchain/xuperchain/core/hdwallet/keychain
+github.com/xuperchain/xuperchain/core/hdwallet/rand
+github.com/xuperchain/xuperchain/core/hdwallet/wordlist
+github.com/xuperchain/xuperchain/core/p2p/base
+github.com/xuperchain/xuperchain/core/p2p/pb
+github.com/xuperchain/xuperchain/core/pb
+github.com/xuperchain/xuperchain/core/permission/acl/utils
+github.com/xuperchain/xuperchain/core/pluginmgr
+github.com/xuperchain/xuperchain/core/utxo/txhash
+# golang.org/x/crypto v0.0.0-20200311171314-f7b00557c8c4
+golang.org/x/crypto/blake2s
+golang.org/x/crypto/ed25519
+golang.org/x/crypto/ed25519/internal/edwards25519
+golang.org/x/crypto/pbkdf2
+golang.org/x/crypto/ripemd160
+golang.org/x/crypto/sha3
+# golang.org/x/net v0.0.0-20200202094626-16171245cfb2
+golang.org/x/net/context
+golang.org/x/net/http/httpguts
+golang.org/x/net/http2
+golang.org/x/net/http2/hpack
+golang.org/x/net/idna
+golang.org/x/net/internal/timeseries
+golang.org/x/net/trace
+# golang.org/x/sys v0.0.0-20200116001909-b77594299b42
+golang.org/x/sys/cpu
+golang.org/x/sys/unix
+# golang.org/x/text v0.3.2
+golang.org/x/text/secure/bidirule
+golang.org/x/text/transform
+golang.org/x/text/unicode/bidi
+golang.org/x/text/unicode/norm
+# google.golang.org/genproto v0.0.0-20191009194640-548a555dbc03
+google.golang.org/genproto/googleapis/api/annotations
+google.golang.org/genproto/googleapis/api/httpbody
+google.golang.org/genproto/googleapis/rpc/status
+google.golang.org/genproto/protobuf/field_mask
+# google.golang.org/grpc v1.29.1
+google.golang.org/grpc
+google.golang.org/grpc/attributes
+google.golang.org/grpc/backoff
+google.golang.org/grpc/balancer
+google.golang.org/grpc/balancer/base
+google.golang.org/grpc/balancer/roundrobin
+google.golang.org/grpc/binarylog/grpc_binarylog_v1
+google.golang.org/grpc/codes
+google.golang.org/grpc/connectivity
+google.golang.org/grpc/credentials
+google.golang.org/grpc/credentials/internal
+google.golang.org/grpc/encoding
+google.golang.org/grpc/encoding/proto
+google.golang.org/grpc/grpclog
+google.golang.org/grpc/internal
+google.golang.org/grpc/internal/backoff
+google.golang.org/grpc/internal/balancerload
+google.golang.org/grpc/internal/binarylog
+google.golang.org/grpc/internal/buffer
+google.golang.org/grpc/internal/channelz
+google.golang.org/grpc/internal/envconfig
+google.golang.org/grpc/internal/grpclog
+google.golang.org/grpc/internal/grpcrand
+google.golang.org/grpc/internal/grpcsync
+google.golang.org/grpc/internal/grpcutil
+google.golang.org/grpc/internal/resolver/dns
+google.golang.org/grpc/internal/resolver/passthrough
+google.golang.org/grpc/internal/status
+google.golang.org/grpc/internal/syscall
+google.golang.org/grpc/internal/transport
+google.golang.org/grpc/keepalive
+google.golang.org/grpc/metadata
+google.golang.org/grpc/naming
+google.golang.org/grpc/peer
+google.golang.org/grpc/resolver
+google.golang.org/grpc/serviceconfig
+google.golang.org/grpc/stats
+google.golang.org/grpc/status
+google.golang.org/grpc/tap
+# gopkg.in/ini.v1 v1.55.0
+gopkg.in/ini.v1
+# gopkg.in/yaml.v2 v2.2.8
+gopkg.in/yaml.v2

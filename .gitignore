@@ -4,7 +4,6 @@
 
 # output files
 output/
-vendor/
 contract_wasm/
 contract_code/
 logs/

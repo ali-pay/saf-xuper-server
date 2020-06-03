@@ -1,11 +1,19 @@
 package controllers
 
 const (
-	Unknown_Error = 0
+	ErrorUnknown                        = 0
+	ErrorContractForAccountNotConfirmed = 1
+	ErrorContractAlreadyExists          = 2
+	ErrorNotEnoughUtxo                  = 3
+	ErrorRwaclInvalid                   = 4
 )
 
 var errMap = map[int]string{
-	Unknown_Error: "未知错误",
+	ErrorUnknown:                        "未知错误",
+	ErrorContractForAccountNotConfirmed: "合约未部署",
+	ErrorContractAlreadyExists:          "合约已存在",
+	ErrorNotEnoughUtxo:                  "账户余额不够",
+	ErrorRwaclInvalid:                   "账户权限不够",
 }
 
 func GetError(code int) string {
@@ -22,4 +30,4 @@ func GetError(code int) string {
 该账户没有足够的xuper NOT_ENOUGH_UTXO_ERROR
 权限不够 RWACL_INVALID_ERROR
 主链无法设置 xuper is forbidden
- */
+*/
