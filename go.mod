@@ -16,10 +16,10 @@ require (
 	github.com/sirupsen/logrus v1.4.1
 	github.com/smartystreets/goconvey v1.6.4 // indirect
 	github.com/tebeka/strftime v0.1.4 // indirect
-	github.com/xuperchain/xuper-sdk-go v1.0.0
-	github.com/xuperchain/xuperchain v0.0.0-20200508112010-eeb1f81b4b45
+	github.com/xuperchain/xuper-sdk-go v1.1.0
+	github.com/xuperchain/xuperchain v0.0.0-20200518074727-6ec6c64891a4
 	google.golang.org/grpc v1.29.1
 	gopkg.in/ini.v1 v1.55.0
 )
 
-replace github.com/xuperchain/xuper-sdk-go v1.0.0 => github.com/xuperchain/xuper-sdk-go v0.0.0-20200407074302-fd8273561271
+//replace github.com/xuperchain/xuper-sdk-go v1.0.0 => github.com/xuperchain/xuper-sdk-go v0.0.0-20200407074302-fd8273561271
