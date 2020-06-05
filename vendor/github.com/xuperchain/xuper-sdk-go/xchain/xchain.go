@@ -122,6 +122,10 @@ func (xc *Xchain) GenComplianceCheckTx(response *pb.PreExecWithSelectUTXORespons
 		Initiator: xc.Initiator,
 	}
 
+	tx.TxInputsExt = response.GetResponse().GetInputs()
+	tx.TxOutputsExt = response.GetResponse().GetOutputs()
+	tx.ContractRequests = response.GetResponse().GetRequests()
+
 	err = common.SetSeed()
 	if err != nil {
 		return nil, err
@@ -204,6 +208,11 @@ func (xc *Xchain) GenerateTxInput(utxoOutputs *pb.UtxoOutput, totalNeed *big.Int
 	// gen txInputs
 	var txInputs []*pb.TxInput
 	var txOutput *pb.TxOutput
+
+	if utxoOutputs == nil {
+		return txInputs, txOutput, nil
+	}
+
 	for _, utxo := range utxoOutputs.UtxoList {
 		txInput := &pb.TxInput{}
 		txInput.RefTxid = utxo.RefTxid
@@ -414,6 +423,11 @@ func (xc *Xchain) GenCompleteTxAndPost(preExeResp *pb.PreExecWithSelectUTXORespo
 	if err != nil {
 		log.Printf("GenRealTx failed, err: %v", err)
 		return "", err
+	}
+
+	//没有手续费
+	if xc.Cfg.ComplianceCheck.ComplianceCheckEndorseServiceFee == 0 {
+		complianceCheckTx = nil
 	}
 
 	endorserSign, err := xc.ComplianceCheck(tx, complianceCheckTx)
