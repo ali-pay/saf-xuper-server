@@ -47,7 +47,7 @@ func Transfer(c *gin.Context) {
 
 	amount := strconv.FormatInt(req.Amount, 10)
 	fee := strconv.FormatInt(req.Fee, 10)
-	txid, err := trans.Transfer(req.To, amount, fee, req.Desc)
+	txid, fee, err := trans.Transfer(req.To, amount, fee, req.Desc)
 	if err != nil {
 		msg := err.Error()
 		if strings.Contains(msg, controllers.ErrorNotEnoughUtxo) {
@@ -61,7 +61,7 @@ func Transfer(c *gin.Context) {
 		log.Printf("transfer fail, err: %s", err.Error())
 		return
 	}
-	log.Printf("transfer success, txid: %s", txid)
+	//log.Printf("transfer success, txid: %s", txid)
 
 	gas, _ := strconv.ParseInt(fee, 10, 64)
 
@@ -80,7 +80,7 @@ func Transfer(c *gin.Context) {
 		log.Printf("get balance fail, err: %s", err.Error())
 		return
 	}
-	log.Printf("get balance success, balance: %s", balance)
+	//log.Printf("get balance success, balance: %s", balance)
 
 	c.JSON(http.StatusOK, gin.H{
 		"code": 200,

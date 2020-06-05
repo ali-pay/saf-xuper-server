@@ -97,7 +97,9 @@ func (c *Contract) Pre(action, codepath, runtime string, arg map[string]string) 
 	if c.ContractAccount != "" {
 		authRequires = append(authRequires, c.ContractAccount+"/"+c.Account.Address)
 	}
-	authRequires = append(authRequires, c.Cfg.ComplianceCheck.ComplianceCheckEndorseServiceAddr)
+	if c.Cfg.ComplianceCheck.IsNeedComplianceCheck{
+		authRequires = append(authRequires, c.Cfg.ComplianceCheck.ComplianceCheckEndorseServiceAddr)
+	}
 	fmt.Println(authRequires)
 	invokeRPCReq := &pb.InvokeRPCRequest{
 		Bcname:      c.ChainName,
@@ -124,7 +126,9 @@ func (c *Contract) Post(preExeWithSelRes *pb.PreExecWithSelectUTXOResponse) (str
 	if c.ContractAccount != "" {
 		authRequires = append(authRequires, c.ContractAccount+"/"+c.Account.Address)
 	}
-	authRequires = append(authRequires, c.Cfg.ComplianceCheck.ComplianceCheckEndorseServiceAddr)
+	if c.Cfg.ComplianceCheck.IsNeedComplianceCheck{
+		authRequires = append(authRequires, c.Cfg.ComplianceCheck.ComplianceCheckEndorseServiceAddr)
+	}
 	c.Initiator = c.Account.Address
 	c.AuthRequire = authRequires
 	c.InvokeRPCReq = nil
