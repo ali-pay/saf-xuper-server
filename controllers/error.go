@@ -1,33 +1,25 @@
 package controllers
 
 const (
-	ErrorUnknown                        = 0
-	ErrorContractForAccountNotConfirmed = 1
-	ErrorContractAlreadyExists          = 2
-	ErrorNotEnoughUtxo                  = 3
-	ErrorRwaclInvalid                   = 4
+	ErrorUnknown                        = "unknown error"
+	ErrorContractForAccountNotConfirmed = "contract for account not confirmed"
+	ErrorContractAlreadyExists          = "contract * already exists"
+	ErrorNotEnoughUtxo                  = "NOT_ENOUGH_UTXO_ERROR"
+	ErrorRwaclInvalid                   = "RWACL_INVALID_ERROR"
+	ErrorConnectionRefused              = "connection refused"
+	ErrorAccountAlreadyExists           = "account already exists"
 )
 
-var errMap = map[int]string{
+var errMap = map[string]string{
 	ErrorUnknown:                        "未知错误",
 	ErrorContractForAccountNotConfirmed: "合约未部署",
 	ErrorContractAlreadyExists:          "合约已存在",
 	ErrorNotEnoughUtxo:                  "账户余额不够",
 	ErrorRwaclInvalid:                   "账户权限不够",
+	ErrorConnectionRefused:              "无法链接或请求有误导致链接被拒接",
+	ErrorAccountAlreadyExists:           "合约账户已存在",
 }
 
-func GetError(code int) string {
+func GetError(code string) string {
 	return errMap[code]
 }
-
-/**
-合约未部署 contract for account not confirmed
-合约已存在 contract counter11 already exists
-账户无效 The number of words in the Mnemonic sentence is not valid. It must be within [12, 15, 18, 21, 24]
-合约账户无效 get account `XC1234567812345672@xuper` error: Key not found
-合约账户已存在 account already exists
-无法连接 connection refused
-该账户没有足够的xuper NOT_ENOUGH_UTXO_ERROR
-权限不够 RWACL_INVALID_ERROR
-主链无法设置 xuper is forbidden
-*/

@@ -36,19 +36,19 @@ func InitTrans(account *account.Account, node, bcname string) *Trans {
 }
 
 // Transfer transfer 'amount' to 'to',and pay 'fee' to miner
-func (t *Trans) Transfer(to, amount, fee, desc string) (string, error) {
+func (t *Trans) Transfer(to, amount, fee, desc string) (string, string, error) {
 	// (total pay amount) = (to amount + fee + checkfee)
 	amount, ok := common.IsValidAmount(amount)
 	if !ok {
-		return "", common.ErrInvalidAmount
+		return "", "", common.ErrInvalidAmount
 	}
 	fee, ok = common.IsValidAmount(fee)
 	if !ok {
-		return "", common.ErrInvalidAmount
+		return "", "", common.ErrInvalidAmount
 	}
 	// generate preExe request
 	invokeRequests := []*pb.InvokeRequest{
-		{ModuleName: "transfer", Amount: fee},//转账请求
+		{ModuleName: "transfer", Amount: fee}, //转账请求
 	}
 	authRequires := []string{}
 	authRequires = append(authRequires, t.Cfg.ComplianceCheck.ComplianceCheckEndorseServiceAddr)
@@ -62,15 +62,15 @@ func (t *Trans) Transfer(to, amount, fee, desc string) (string, error) {
 	amountInt64, err := strconv.ParseInt(amount, 10, 64)
 	if err != nil {
 		log.Printf("Transfer amount to int64 err: %v", err)
-		return "", err
+		return "", "", err
 	}
 	feeInt64, err := strconv.ParseInt(fee, 10, 64)
 	if err != nil {
 		log.Printf("Transfer fee to int64 err: %v", err)
-		return "", err
+		return "", "", err
 	}
 	if amountInt64 < int64(t.Cfg.ComplianceCheck.ComplianceCheckEndorseServiceFee) {
-		return "", common.ErrAmountNotEnough
+		return "", "", common.ErrAmountNotEnough
 	}
 
 	needTotalAmount := amountInt64 + int64(t.Cfg.ComplianceCheck.ComplianceCheckEndorseServiceFee) + feeInt64
@@ -90,7 +90,7 @@ func (t *Trans) Transfer(to, amount, fee, desc string) (string, error) {
 		// 判断是否是手续费不够引起的错误
 		if !strings.Contains(err.Error(), "need input fee") {
 			log.Printf("Transfer PreExecWithSelecUTXO failed, err: %v", err)
-			return "", err
+			return "", fee, err
 		}
 
 		// 获取手续费，重新转账
@@ -109,7 +109,8 @@ func (t *Trans) Transfer(to, amount, fee, desc string) (string, error) {
 	t.Amount = strconv.FormatInt(amountInt64, 10)
 
 	// post
-	return t.GenCompleteTxAndPost(preExeWithSelRes)
+	txid, err := t.GenCompleteTxAndPost(preExeWithSelRes)
+	return txid, fee, err
 }
 
 // QueryTx query tx to get detail information

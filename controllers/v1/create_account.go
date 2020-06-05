@@ -27,7 +27,7 @@ func CreateAccount(c *gin.Context) {
 
 	//log.Printf("create account success, addr: %s, mnemonic: %s", acc.Address, acc.Mnemonic)
 
-	c.JSON(http.StatusInternalServerError, gin.H{
+	c.JSON(http.StatusOK, gin.H{
 		"code": 200,
 		"msg":  "创建成功",
 		"resp": controllers.Result{

@@ -4,6 +4,7 @@ import (
 	//"log"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/xuperchain/xuper-sdk-go/account"
@@ -47,25 +48,35 @@ func Transfer(c *gin.Context) {
 
 	amount := strconv.FormatInt(req.Amount, 10)
 	fee := strconv.FormatInt(req.Fee, 10)
-	txid, err := trans.Transfer(req.To, amount, fee, req.Desc)
+	txid, fee, err := trans.Transfer(req.To, amount, fee, req.Desc)
 	if err != nil {
+		msg := err.Error()
+		if strings.Contains(msg, controllers.ErrorNotEnoughUtxo) {
+			msg = "余额不足，该交易需要支付gas:" + fee + "，请修改转账金额，确保足够扣除该手续费"
+		}
 		c.JSON(http.StatusBadRequest, gin.H{
 			"code":  400,
 			"msg":   "转账失败",
-			"error": err.Error(),
+			"error": msg,
 		})
 		log.Printf("transfer fail, err: %s", err.Error())
 		return
 	}
 	log.Printf("transfer success, txid: %s", txid)
 
+	gas, _ := strconv.ParseInt(fee, 10, 64)
+
 	//查询余额
 	balance, err := trans.GetBalance()
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"code":  400,
-			"msg":   "查询失败",
+			"msg":   "转账成功，但查询余额失败",
 			"error": err.Error(),
+			"resp": controllers.Result{
+				Txid:    txid,
+				GasUsed: gas,
+			},
 		})
 		log.Printf("get balance fail, err: %s", err.Error())
 		return
@@ -78,6 +89,7 @@ func Transfer(c *gin.Context) {
 		"resp": controllers.Result{
 			Txid:           txid,
 			AccountBalance: balance,
+			GasUsed:        gas,
 		},
 	})
 }
