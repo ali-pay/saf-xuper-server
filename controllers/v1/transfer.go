@@ -47,7 +47,7 @@ func Transfer(c *gin.Context) {
 
 	amount := strconv.FormatInt(req.Amount, 10)
 	fee := strconv.FormatInt(req.Fee, 10)
-	txid, err := trans.Transfer(req.To, amount, fee, req.Desc)
+	txid, fee, err := trans.Transfer(req.To, amount, fee, req.Desc)
 	if err != nil {
 		msg := err.Error()
 		if strings.Contains(msg, controllers.ErrorNotEnoughUtxo) {
