@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"math/big"
 
-	"github.com/xuperchain/xuperchain/core/pb"
+	"github.com/xuperchain/xuper-sdk-go/pb"
 )
 
 type HexID []byte

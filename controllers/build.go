@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"fmt"
-	//"log"
 	"os/exec"
 	"path/filepath"
 	"strings"

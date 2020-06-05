@@ -2,7 +2,6 @@ package v1
 
 import (
 	"io/ioutil"
-	//"log"
 	"net/http"
 	"os"
 	"path/filepath"

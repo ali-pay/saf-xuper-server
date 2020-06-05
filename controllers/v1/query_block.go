@@ -4,12 +4,13 @@ import (
 	"context"
 	"encoding/hex"
 	"errors"
-	"github.com/gin-gonic/gin"
-	"github.com/xuperchain/xuperchain/core/pb"
-	"google.golang.org/grpc"
-	//"log"
 	"net/http"
 	"time"
+
+	"github.com/gin-gonic/gin"
+	"github.com/xuperchain/xuper-sdk-go/pb"
+	"google.golang.org/grpc"
+
 	"xupercc/controllers"
 	log "xupercc/utils"
 )

@@ -1,13 +1,14 @@
 package middlewares
 
 import (
-	"github.com/astaxie/beego/logs"
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"os"
 	"path"
 	"time"
 	"xupercc/conf"
+
+	"github.com/astaxie/beego/logs"
+	"github.com/gin-gonic/gin"
 )
 
 func Logs() gin.HandlerFunc {

@@ -1,10 +1,10 @@
 package v1
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/xuperchain/xuper-sdk-go/account"
-	//"log"
-	"net/http"
 
 	"xupercc/conf"
 	"xupercc/controllers"

@@ -2,7 +2,6 @@ package v1
 
 import (
 	"fmt"
-	//"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

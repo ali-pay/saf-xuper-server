@@ -3,15 +3,14 @@ package v1
 import (
 	"context"
 	"encoding/hex"
-	"github.com/xuperchain/xuperchain/core/pb"
-	"google.golang.org/grpc"
-	//"log"
 	"net/http"
 	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/xuperchain/xuper-sdk-go/account"
+	"github.com/xuperchain/xuper-sdk-go/pb"
 	"github.com/xuperchain/xuper-sdk-go/transfer"
+	"google.golang.org/grpc"
 
 	"xupercc/conf"
 	"xupercc/controllers"
