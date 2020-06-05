@@ -2,13 +2,12 @@ package v1
 
 import (
 	"fmt"
-	//"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/xuperchain/xuper-sdk-go/account"
 	"github.com/xuperchain/xuper-sdk-go/contract"
-	"github.com/xuperchain/xuperchain/core/pb"
+	"github.com/xuperchain/xuper-sdk-go/pb"
 
 	"xupercc/conf"
 	"xupercc/controllers"

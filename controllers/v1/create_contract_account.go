@@ -2,7 +2,6 @@ package v1
 
 import (
 	"fmt"
-	//"log"
 	"math/rand"
 	"net/http"
 	"time"

@@ -10,8 +10,8 @@ import (
 	"github.com/golang/protobuf/proto"
 	"github.com/xuperchain/xuper-sdk-go/account"
 	"github.com/xuperchain/xuper-sdk-go/config"
+	"github.com/xuperchain/xuper-sdk-go/pb"
 	"github.com/xuperchain/xuper-sdk-go/xchain"
-	"github.com/xuperchain/xuperchain/core/pb"
 )
 
 const (
@@ -130,7 +130,7 @@ func (c *Contract) Post(preExeWithSelRes *pb.PreExecWithSelectUTXOResponse) (str
 	c.InvokeRPCReq = nil
 	c.PreSelUTXOReq = nil
 	c.Fee = strconv.Itoa(int(preExeWithSelRes.Response.GasUsed))
-	c.Amount = "0"
+	c.TotalToAmount = "0"
 
-	return c.GenCompleteTxAndPost(preExeWithSelRes)
+	return c.GenCompleteTxAndPost(preExeWithSelRes, "")
 }

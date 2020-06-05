@@ -1,8 +1,9 @@
 package test
 
 import (
-	"github.com/astaxie/beego/logs"
 	"testing"
+
+	"github.com/astaxie/beego/logs"
 )
 
 func TestLogs(t *testing.T) {

@@ -1,10 +1,12 @@
 package utils
 
 import (
-	"github.com/astaxie/beego/logs"
 	"os"
 	"path"
 	"sync"
+
+	"github.com/astaxie/beego/logs"
+
 	"xupercc/conf"
 )
 
