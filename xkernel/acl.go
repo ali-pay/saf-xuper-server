@@ -113,7 +113,9 @@ func (c *Acl) Pre(action, contractName, contractMethod string, aks map[string]fl
 	if c.ContractAccount != "" {
 		authRequires = append(authRequires, c.ContractAccount+"/"+c.Account.Address)
 	}
-	authRequires = append(authRequires, c.Cfg.ComplianceCheck.ComplianceCheckEndorseServiceAddr)
+	if c.Cfg.ComplianceCheck.IsNeedComplianceCheck {
+		authRequires = append(authRequires, c.Cfg.ComplianceCheck.ComplianceCheckEndorseServiceAddr)
+	}
 
 	invokeRPCReq := &pb.InvokeRPCRequest{
 		Bcname:      c.ChainName,
@@ -140,7 +142,9 @@ func (c *Acl) Post(preExeWithSelRes *pb.PreExecWithSelectUTXOResponse) (string, 
 	if c.ContractAccount != "" {
 		authRequires = append(authRequires, c.ContractAccount+"/"+c.Account.Address)
 	}
-	authRequires = append(authRequires, c.Cfg.ComplianceCheck.ComplianceCheckEndorseServiceAddr)
+	if c.Cfg.ComplianceCheck.IsNeedComplianceCheck {
+		authRequires = append(authRequires, c.Cfg.ComplianceCheck.ComplianceCheckEndorseServiceAddr)
+	}
 	c.Initiator = c.Account.Address
 	c.AuthRequire = authRequires
 	c.InvokeRPCReq = nil

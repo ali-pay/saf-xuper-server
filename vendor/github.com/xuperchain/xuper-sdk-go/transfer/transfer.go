@@ -96,7 +96,9 @@ func (t *Trans) transfer(to, amount, fee, desc, hdPublicKey string) (string, str
 		return "", "", common.ErrInvalidAmount
 	}
 	// generate preExe request
-	invokeRequests := []*pb.InvokeRequest{}
+	invokeRequests := []*pb.InvokeRequest{
+		{ModuleName: "transfer", Amount: fee}, //转账请求
+	}
 
 	invokeRPCReq := &pb.InvokeRPCRequest{
 		Bcname:    t.ChainName,
