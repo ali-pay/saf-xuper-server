@@ -7,7 +7,7 @@ output/
 contract_wasm/
 contract_code/
 logs/
-!vendor/github.com/astaxie/beego/logs/
+!vendor/*
 xupercc
 account
 !account/
