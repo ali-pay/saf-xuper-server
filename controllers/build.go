@@ -6,8 +6,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"xupercc/conf"
-	log "xupercc/utils"
+	"github.com/jason-cn-dev/xupercc/conf"
+	log "github.com/jason-cn-dev/xupercc/utils"
 )
 
 //ccfile: 带后缀的是文件，不带的是包

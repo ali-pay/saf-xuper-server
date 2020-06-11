@@ -63,6 +63,16 @@ github.com/ipfs/go-log
 github.com/ipfs/go-log/tracer
 github.com/ipfs/go-log/tracer/wire
 github.com/ipfs/go-log/writer
+# github.com/jason-cn-dev/xuper-sdk-go v0.0.0-20200611033815-970983e9c23b
+github.com/jason-cn-dev/xuper-sdk-go/account
+github.com/jason-cn-dev/xuper-sdk-go/common
+github.com/jason-cn-dev/xuper-sdk-go/config
+github.com/jason-cn-dev/xuper-sdk-go/contract
+github.com/jason-cn-dev/xuper-sdk-go/crypto
+github.com/jason-cn-dev/xuper-sdk-go/pb
+github.com/jason-cn-dev/xuper-sdk-go/transfer
+github.com/jason-cn-dev/xuper-sdk-go/txhash
+github.com/jason-cn-dev/xuper-sdk-go/xchain
 # github.com/json-iterator/go v1.1.9
 github.com/json-iterator/go
 # github.com/konsorten/go-windows-terminal-sequences v1.0.3
@@ -110,7 +120,7 @@ github.com/mr-tron/base58/base58
 github.com/multiformats/go-multiaddr
 # github.com/multiformats/go-multihash v0.0.8
 github.com/multiformats/go-multihash
-# github.com/opentracing/opentracing-go v1.0.2
+# github.com/opentracing/opentracing-go v1.1.0
 github.com/opentracing/opentracing-go
 github.com/opentracing/opentracing-go/ext
 github.com/opentracing/opentracing-go/log
@@ -174,17 +184,7 @@ github.com/xuperchain/crypto/core/signature
 github.com/xuperchain/crypto/core/utils
 # github.com/xuperchain/log15 v0.0.0-20190620081506-bc88a9198230
 github.com/xuperchain/log15
-# github.com/xuperchain/xuper-sdk-go v1.1.0
-github.com/xuperchain/xuper-sdk-go/account
-github.com/xuperchain/xuper-sdk-go/common
-github.com/xuperchain/xuper-sdk-go/config
-github.com/xuperchain/xuper-sdk-go/contract
-github.com/xuperchain/xuper-sdk-go/crypto
-github.com/xuperchain/xuper-sdk-go/pb
-github.com/xuperchain/xuper-sdk-go/transfer
-github.com/xuperchain/xuper-sdk-go/txhash
-github.com/xuperchain/xuper-sdk-go/xchain
-# github.com/xuperchain/xuperchain v0.0.0-20200605081231-e3e1bb627db6
+# github.com/xuperchain/xuperchain v0.0.0-20200609105931-e71603902b23
 github.com/xuperchain/xuperchain/core/common
 github.com/xuperchain/xuperchain/core/common/config
 github.com/xuperchain/xuperchain/core/common/log
@@ -214,7 +214,6 @@ golang.org/x/crypto/pbkdf2
 golang.org/x/crypto/ripemd160
 golang.org/x/crypto/sha3
 # golang.org/x/net v0.0.0-20200202094626-16171245cfb2
-golang.org/x/net/context
 golang.org/x/net/http/httpguts
 golang.org/x/net/http2
 golang.org/x/net/http2/hpack
@@ -229,7 +228,7 @@ golang.org/x/text/secure/bidirule
 golang.org/x/text/transform
 golang.org/x/text/unicode/bidi
 golang.org/x/text/unicode/norm
-# google.golang.org/genproto v0.0.0-20190927181202-20e1ac93f88c
+# google.golang.org/genproto v0.0.0-20200608115520-7c474a2e3482
 google.golang.org/genproto/googleapis/api/annotations
 google.golang.org/genproto/googleapis/api/httpbody
 google.golang.org/genproto/googleapis/rpc/status
@@ -274,7 +273,7 @@ google.golang.org/grpc/serviceconfig
 google.golang.org/grpc/stats
 google.golang.org/grpc/status
 google.golang.org/grpc/tap
-# google.golang.org/protobuf v1.23.0
+# google.golang.org/protobuf v1.24.0
 google.golang.org/protobuf/encoding/protojson
 google.golang.org/protobuf/encoding/prototext
 google.golang.org/protobuf/encoding/protowire
@@ -308,6 +307,7 @@ google.golang.org/protobuf/runtime/protoimpl
 google.golang.org/protobuf/types/descriptorpb
 google.golang.org/protobuf/types/known/anypb
 google.golang.org/protobuf/types/known/durationpb
+google.golang.org/protobuf/types/known/fieldmaskpb
 google.golang.org/protobuf/types/known/timestamppb
 google.golang.org/protobuf/types/known/wrapperspb
 google.golang.org/protobuf/types/pluginpb

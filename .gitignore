@@ -11,3 +11,4 @@ logs/
 xupercc
 account
 !account/
+.null

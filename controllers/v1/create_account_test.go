@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"testing"
 
-	"xupercc/controllers"
+	"github.com/jason-cn-dev/xupercc/controllers"
 )
 
 func TestCreateAccount(t *testing.T) {

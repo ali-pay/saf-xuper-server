@@ -1,8 +1,8 @@
 package main
 
 import (
-	"xupercc/conf"
-	"xupercc/routers"
+	"github.com/jason-cn-dev/xupercc/conf"
+	"github.com/jason-cn-dev/xupercc/routers"
 )
 
 func main() {

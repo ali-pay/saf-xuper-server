@@ -3,8 +3,8 @@ package test
 import (
 	"testing"
 
-	"github.com/xuperchain/xuper-sdk-go/account"
-	"github.com/xuperchain/xuper-sdk-go/contract"
+	"github.com/jason-cn-dev/xuper-sdk-go/account"
+	"github.com/jason-cn-dev/xuper-sdk-go/contract"
 )
 
 func TestAccount(t *testing.T) {
