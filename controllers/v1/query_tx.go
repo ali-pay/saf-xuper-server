@@ -7,14 +7,14 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/xuperchain/xuper-sdk-go/account"
-	"github.com/xuperchain/xuper-sdk-go/pb"
-	"github.com/xuperchain/xuper-sdk-go/transfer"
+	"github.com/jason-cn-dev/xuper-sdk-go/account"
+	"github.com/jason-cn-dev/xuper-sdk-go/pb"
+	"github.com/jason-cn-dev/xuper-sdk-go/transfer"
 	"google.golang.org/grpc"
 
-	"xupercc/conf"
-	"xupercc/controllers"
-	log "xupercc/utils"
+	"github.com/jason-cn-dev/xupercc/conf"
+	"github.com/jason-cn-dev/xupercc/controllers"
+	log "github.com/jason-cn-dev/xupercc/utils"
 )
 
 func QueryTxSDK(c *gin.Context) {

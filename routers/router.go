@@ -3,8 +3,8 @@ package routers
 import (
 	"github.com/gin-gonic/gin"
 
-	"xupercc/controllers/v1"
-	"xupercc/middlewares"
+	"github.com/jason-cn-dev/xupercc/controllers/v1"
+	"github.com/jason-cn-dev/xupercc/middlewares"
 )
 
 func NewRouter() *gin.Engine {

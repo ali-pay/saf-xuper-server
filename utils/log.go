@@ -5,7 +5,7 @@ import (
 	"os"
 	"path"
 
-	"xupercc/conf"
+	"github.com/jason-cn-dev/xupercc/conf"
 )
 
 //使用官方的log模块，加入日志保存

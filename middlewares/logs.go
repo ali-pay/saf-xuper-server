@@ -5,10 +5,11 @@ import (
 	"os"
 	"path"
 	"time"
-	"xupercc/conf"
 
 	"github.com/astaxie/beego/logs"
 	"github.com/gin-gonic/gin"
+
+	"github.com/jason-cn-dev/xupercc/conf"
 )
 
 func Logs() gin.HandlerFunc {

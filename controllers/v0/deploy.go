@@ -3,15 +3,13 @@ package v0
 import (
 	"log"
 	"net/http"
-	"xupercc/conf"
 
 	"github.com/gin-gonic/gin"
-	"github.com/xuperchain/xuper-sdk-go/account"
-	"github.com/xuperchain/xuper-sdk-go/contract"
+	"github.com/jason-cn-dev/xuper-sdk-go/account"
+	"github.com/jason-cn-dev/xuper-sdk-go/contract"
 
-	"xupercc/controllers"
-	//"xupercc/xuper-sdk-go/account"
-	//"xupercc/xuper-sdk-go/contract"
+	"github.com/jason-cn-dev/xupercc/conf"
+	"github.com/jason-cn-dev/xupercc/controllers"
 )
 
 func Deploy(c *gin.Context) {

@@ -11,7 +11,7 @@ import (
 	"github.com/rifflock/lfshook"
 	"github.com/sirupsen/logrus"
 
-	"xupercc/conf"
+	"github.com/jason-cn-dev/xupercc/conf"
 )
 
 // 日志记录到文件

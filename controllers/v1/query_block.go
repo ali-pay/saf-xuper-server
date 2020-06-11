@@ -8,11 +8,11 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/xuperchain/xuper-sdk-go/pb"
+	"github.com/jason-cn-dev/xuper-sdk-go/pb"
 	"google.golang.org/grpc"
 
-	"xupercc/controllers"
-	log "xupercc/utils"
+	"github.com/jason-cn-dev/xupercc/controllers"
+	log "github.com/jason-cn-dev/xupercc/utils"
 )
 
 func QueryBlock(c *gin.Context) {
