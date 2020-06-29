@@ -53,6 +53,7 @@ func NewRouter() *gin.Engine {
 	rv1.POST("group_node", v1.GroupNode)
 	rv1.POST("query_acl", v1.QueryAcl)
 	rv1.POST("query_block", v1.QueryBlock)
+	rv1.POST("query_list", v1.QueryLists)
 
 	return r
 }

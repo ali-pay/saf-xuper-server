@@ -1,6 +1,6 @@
 # 超级链的后端
 
-## [查看API文档](超级链API文档_v0514.md)
+## [查看API文档](超级链API文档_v0629.md)
 
 ## 使用说明
 
@@ -74,6 +74,10 @@ runtime_file = runtime.log
 language = 1
 # 助记词的长度，可选：1-3 8/16/24位
 strength = 1
+
+[cache]
+# 区块和交易的缓存大小，建议不要超过15
+size = 10
 ```
 
 conf/sdk.yaml：这是sdk的配置，用来跟链交互用的

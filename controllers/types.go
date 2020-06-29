@@ -426,3 +426,109 @@ type ContractDesc struct {
 	Args    interface{} `json:"args,omitempty"`
 	Trigger TriggerDesc `json:"trigger,omitempty"`
 }
+
+func SimpleTx(tx *pb.Transaction) *Transaction {
+	t := &Transaction{
+		Txid:      tx.Txid,
+		Blockid:   tx.Blockid,
+		Timestamp: tx.Timestamp,
+		Initiator: tx.Initiator,
+		Coinbase:  tx.Coinbase,
+	}
+
+	for _, input := range tx.TxInputs {
+		t.TxInputs = append(t.TxInputs, TxInput{
+			RefTxid:   input.RefTxid,
+			RefOffset: input.RefOffset,
+			FromAddr:  string(input.FromAddr),
+			Amount:    FromAmountBytes(input.Amount),
+		})
+	}
+
+	for _, output := range tx.TxOutputs {
+		//过滤
+		//to := string(output.ToAddr)
+		//if to == "$" || to == v.Initiator {
+		//	continue
+		//}
+
+		t.TxOutputs = append(t.TxOutputs, TxOutput{
+			Amount: FromAmountBytes(output.Amount),
+			ToAddr: string(output.ToAddr),
+		})
+	}
+	return t
+}
+
+func SimpleTxs(txs []*pb.Transaction) []*Transaction {
+	tempTxs := []*Transaction{}
+	for _, tx := range txs {
+		t := &Transaction{
+			Txid:      tx.Txid,
+			Blockid:   tx.Blockid,
+			Timestamp: tx.Timestamp,
+			Initiator: tx.Initiator,
+			Coinbase:  tx.Coinbase,
+		}
+
+		for _, input := range tx.TxInputs {
+			t.TxInputs = append(t.TxInputs, TxInput{
+				RefTxid:   input.RefTxid,
+				RefOffset: input.RefOffset,
+				FromAddr:  string(input.FromAddr),
+				Amount:    FromAmountBytes(input.Amount),
+			})
+		}
+
+		for _, output := range tx.TxOutputs {
+			//过滤
+			//to := string(output.ToAddr)
+			//if to == "$" || to == v.Initiator {
+			//	continue
+			//}
+
+			t.TxOutputs = append(t.TxOutputs, TxOutput{
+				Amount: FromAmountBytes(output.Amount),
+				ToAddr: string(output.ToAddr),
+			})
+		}
+		tempTxs = append(tempTxs, t)
+	}
+	return tempTxs
+}
+
+func SimpleBlock(block *pb.InternalBlock) *InternalBlock {
+	iblock := &InternalBlock{
+		Blockid:   block.Blockid,
+		PreHash:   block.PreHash,
+		Proposer:  string(block.Proposer),
+		Height:    block.Height,
+		Timestamp: block.Timestamp,
+		TxCount:   block.TxCount,
+		InTrunk:   block.InTrunk,
+		FailedTxs: block.FailedTxs,
+	}
+	iblock.Transactions = make([]*Transaction, len(block.Transactions))
+	for i := range block.Transactions {
+		iblock.Transactions[i] = SimpleTx(block.Transactions[i])
+	}
+	return iblock
+}
+
+func SimpleBlocks(blocks []*pb.InternalBlock) []*InternalBlock {
+	tempBlocks := []*InternalBlock{}
+	for _, v := range blocks {
+		block := &InternalBlock{
+			Height:       v.Height,
+			Blockid:      v.Blockid,
+			Timestamp:    v.Timestamp,
+			Proposer:     string(v.Proposer),
+			PreHash:      v.PreHash,
+			Transactions: SimpleTxs(v.Transactions),
+			TxCount:      v.TxCount,
+			InTrunk:      v.InTrunk,
+		}
+		tempBlocks = append(tempBlocks, block)
+	}
+	return tempBlocks
+}

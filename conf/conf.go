@@ -11,6 +11,7 @@ var (
 	Code   *CodeConf
 	Log    *LogConf
 	Req    *ReqConf
+	Cache  *CacheConf
 )
 
 type AppConf struct {
@@ -42,8 +43,13 @@ type ReqConf struct {
 	Strength uint8 `json:"strength"`
 }
 
+type CacheConf struct {
+	Size int `ini:"size"`
+}
+
+//todo 有空了将这个改成yaml来配置 ini太麻烦了
 //初始化配置
-func Init() {
+func init() {
 
 	cfg, err := ini.Load("conf/app.ini")
 	if err != nil {
@@ -63,9 +69,9 @@ func Init() {
 	cfg.Section("server").MapTo(Server)
 
 	Log = &LogConf{
-		FilePath: "logs/",
-		FileName: "app.log",
-		RouterFile: "router.log",
+		FilePath:    "logs/",
+		FileName:    "app.log",
+		RouterFile:  "router.log",
 		RunTimeFile: "runtime.log",
 	}
 	cfg.Section("log").MapTo(Log)
@@ -83,6 +89,11 @@ func Init() {
 		Strength: 1,
 	}
 	cfg.Section("req").MapTo(Req)
+
+	Cache = &CacheConf{
+		Size: 10,
+	}
+	cfg.Section("cache").MapTo(Cache)
 
 	//生产环境
 	if App.AppMode == "release" {
