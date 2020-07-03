@@ -87,7 +87,7 @@ func Status_Old(c *gin.Context) {
 		return
 	}
 
-	status := controllers.FromSystemStatusPB(reply.GetSystemsStatus())
+	status := log.FromSystemStatusPB(reply.GetSystemsStatus())
 
 	c.JSON(http.StatusOK, gin.H{
 		"code": 200,
@@ -97,7 +97,7 @@ func Status_Old(c *gin.Context) {
 
 }
 
-func GetChainStatus(node, bcname string) (*controllers.SystemStatus, error) {
+func GetChainStatus(node, bcname string) (*log.SystemStatus, error) {
 	conn, err := grpc.Dial(node, grpc.WithInsecure(), grpc.WithMaxMsgSize(64<<20-1))
 	if err != nil {
 		log.Printf("can not connect to node, err: %s", err.Error())
@@ -143,7 +143,7 @@ func GetChainStatus(node, bcname string) (*controllers.SystemStatus, error) {
 		return nil, errors.New(msg)
 	}
 
-	return controllers.FromSystemStatusPB(reply.GetSystemsStatus()), nil
+	return log.FromSystemStatusPB(reply.GetSystemsStatus()), nil
 }
 
 func Status(c *gin.Context) {

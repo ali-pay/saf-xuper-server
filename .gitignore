@@ -7,7 +7,7 @@ output/
 contract_wasm/
 contract_code/
 logs/
-!vendor/*
+!vendor/
 xupercc
 account
 !account/

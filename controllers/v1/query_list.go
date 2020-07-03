@@ -40,10 +40,10 @@ func QueryLists(c *gin.Context) {
 	}
 
 	//先将最新的区块缓存起来,因为要逆序插入缓存列表
-	var blocks []*controllers.InternalBlock
+	var blocks []*log.InternalBlock
 
 	//过滤不匹配的链
-	var chain *controllers.ChainStatus
+	var chain *log.ChainStatus
 	for _, c := range status.ChainStatus {
 		if c.Name != req.BcName {
 			continue
@@ -90,7 +90,7 @@ func QueryLists(c *gin.Context) {
 
 		//插入交易缓存列表
 		count := 0
-		var txs []*controllers.Transaction
+		var txs []*log.Transaction
 	out:
 		for _, block := range blocks {
 			for _, tx := range block.Transactions {

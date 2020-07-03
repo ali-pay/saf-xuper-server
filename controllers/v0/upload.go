@@ -137,7 +137,7 @@ func Upload(c *gin.Context) {
 
 	url := conf.Server.Protocol + "://%s:%s/download/%s"
 	filename = filepath.Base(wasmfile)
-	downloadUrl := fmt.Sprintf(url, ip.String(), conf.Server.HttpPort, filename)
+	downloadUrl := fmt.Sprintf(url, ip, conf.Server.HttpPort, filename)
 	c.JSON(http.StatusOK, gin.H{
 		"code":     200,
 		"msg":      "合约编译成功，请下载部署",

@@ -8,16 +8,19 @@ require (
 	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-gonic/gin v1.6.3
 	github.com/golang/protobuf v1.4.2
-	github.com/jason-cn-dev/xuper-sdk-go v0.0.0-20200611033815-970983e9c23b
+	github.com/jason-cn-dev/xuper-sdk-go v0.0.0-20200702084447-1434ac0714c8
 	github.com/jehiah/go-strftime v0.0.0-20171201141054-1d33003b3869 // indirect
 	github.com/lestrrat-go/file-rotatelogs v2.3.0+incompatible
 	github.com/lestrrat-go/strftime v1.0.1 // indirect
+	github.com/natefinch/lumberjack v2.0.0+incompatible
 	github.com/rifflock/lfshook v0.0.0-20180920164130-b9218ef580f5
 	github.com/shiena/ansicolor v0.0.0-20151119151921-a422bbe96644 // indirect
 	github.com/sirupsen/logrus v1.6.0
 	github.com/smartystreets/goconvey v1.6.4 // indirect
 	github.com/tebeka/strftime v0.1.4 // indirect
 	github.com/xuperchain/xuperchain v0.0.0-20200609105931-e71603902b23
+	go.uber.org/zap v1.10.0
 	google.golang.org/grpc v1.29.1
 	gopkg.in/ini.v1 v1.57.0
+	gopkg.in/natefinch/lumberjack.v2 v2.0.0 // indirect
 )

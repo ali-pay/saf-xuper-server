@@ -63,7 +63,7 @@ github.com/ipfs/go-log
 github.com/ipfs/go-log/tracer
 github.com/ipfs/go-log/tracer/wire
 github.com/ipfs/go-log/writer
-# github.com/jason-cn-dev/xuper-sdk-go v0.0.0-20200611033815-970983e9c23b
+# github.com/jason-cn-dev/xuper-sdk-go v0.0.0-20200702084447-1434ac0714c8
 github.com/jason-cn-dev/xuper-sdk-go/account
 github.com/jason-cn-dev/xuper-sdk-go/common
 github.com/jason-cn-dev/xuper-sdk-go/config
@@ -120,6 +120,8 @@ github.com/mr-tron/base58/base58
 github.com/multiformats/go-multiaddr
 # github.com/multiformats/go-multihash v0.0.8
 github.com/multiformats/go-multihash
+# github.com/natefinch/lumberjack v2.0.0+incompatible
+github.com/natefinch/lumberjack
 # github.com/opentracing/opentracing-go v1.1.0
 github.com/opentracing/opentracing-go
 github.com/opentracing/opentracing-go/ext
@@ -206,6 +208,17 @@ github.com/xuperchain/xuperchain/core/p2p/pb
 github.com/xuperchain/xuperchain/core/pb
 github.com/xuperchain/xuperchain/core/permission/acl/utils
 github.com/xuperchain/xuperchain/core/pluginmgr
+# go.uber.org/atomic v1.4.0
+go.uber.org/atomic
+# go.uber.org/multierr v1.1.0
+go.uber.org/multierr
+# go.uber.org/zap v1.10.0
+go.uber.org/zap
+go.uber.org/zap/buffer
+go.uber.org/zap/internal/bufferpool
+go.uber.org/zap/internal/color
+go.uber.org/zap/internal/exit
+go.uber.org/zap/zapcore
 # golang.org/x/crypto v0.0.0-20200320181102-891825fb96df
 golang.org/x/crypto/blake2s
 golang.org/x/crypto/ed25519
@@ -214,6 +227,7 @@ golang.org/x/crypto/pbkdf2
 golang.org/x/crypto/ripemd160
 golang.org/x/crypto/sha3
 # golang.org/x/net v0.0.0-20200202094626-16171245cfb2
+golang.org/x/net/context
 golang.org/x/net/http/httpguts
 golang.org/x/net/http2
 golang.org/x/net/http2/hpack

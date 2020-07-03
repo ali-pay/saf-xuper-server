@@ -16,7 +16,7 @@ func Download(c *gin.Context) {
 	wasmfile := conf.Code.WasmPath + filename
 
 	//检查是否存在
-	isExist, err := utils.PathExists(wasmfile)
+	isExist, err := utils.FileExist(wasmfile)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"code": 500,

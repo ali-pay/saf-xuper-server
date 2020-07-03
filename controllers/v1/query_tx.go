@@ -127,7 +127,7 @@ func QueryTx(c *gin.Context) {
 		log.Printf("tx not found")
 		return
 	}
-	tx := controllers.GetDetailedFromPBTx(reply.Tx)
+	tx := log.FullTx(reply.Tx)
 	c.JSON(http.StatusOK, gin.H{
 		"code": 200,
 		"msg":  "查询成功",

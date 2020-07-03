@@ -89,7 +89,7 @@ func QueryBlock_D(c *gin.Context) {
 		return
 	}
 
-	iblock := controllers.FromInternalBlockPB(reply.Block)
+	iblock := log.FromInternalBlockPB(reply.Block)
 	c.JSON(http.StatusOK, gin.H{
 		"code": 200,
 		"msg":  action + "成功",
@@ -97,7 +97,7 @@ func QueryBlock_D(c *gin.Context) {
 	})
 }
 
-func GetChainBlock(node, bcname, id string, height int64) (*controllers.InternalBlock, error) {
+func GetChainBlock(node, bcname, id string, height int64) (*log.InternalBlock, error) {
 	conn, err := grpc.Dial(node, grpc.WithInsecure(), grpc.WithMaxMsgSize(64<<20-1))
 	defer conn.Close()
 	ctx, cancel := context.WithTimeout(context.Background(), 15000*time.Millisecond)
@@ -143,7 +143,7 @@ func GetChainBlock(node, bcname, id string, height int64) (*controllers.Internal
 		return nil, errors.New("查询失败，找不到该区块")
 	}
 
-	return controllers.SimpleBlock(reply.Block), nil
+	return log.SimpleBlock(reply.Block), nil
 }
 
 func QueryBlock(c *gin.Context) {

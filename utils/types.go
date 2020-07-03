@@ -1,11 +1,16 @@
-package controllers
+package utils
 
 import (
+	"crypto/md5"
+	"crypto/sha1"
+	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
+	"fmt"
 	"math/big"
 
 	"github.com/jason-cn-dev/xuper-sdk-go/pb"
+	"github.com/jason-cn-dev/xuper-sdk-go/txhash"
 )
 
 type HexID []byte
@@ -96,6 +101,7 @@ type Transaction struct {
 	Version           int32            `json:"version,omitempty"`
 	Autogen           bool             `json:"autogen,omitempty"`
 	Coinbase          bool             `json:"coinbase,omitempty"`
+	VoteCoinbase      bool             `json:"voteCoinbase,omitempty"`
 	TxInputsExt       []TxInputExt     `json:"txInputsExt,omitempty"`
 	TxOutputsExt      []TxOutputExt    `json:"txOutputsExt,omitempty"`
 	ContractRequests  []*InvokeRequest `json:"contractRequests,omitempty"`
@@ -126,98 +132,6 @@ func (b *BigInt) MarshalJSON() ([]byte, error) {
 	return json.Marshal(str)
 }
 
-//这个是原版的解析交易数据的函数，只是改了函数名
-func GetDetailedFromPBTx(tx *pb.Transaction) *Transaction {
-	t := &Transaction{
-		Txid:              tx.Txid,
-		Blockid:           tx.Blockid,
-		Nonce:             tx.Nonce,
-		Timestamp:         tx.Timestamp,
-		Version:           tx.Version,
-		Desc:              string(tx.Desc),
-		Autogen:           tx.Autogen,
-		Coinbase:          tx.Coinbase,
-		Initiator:         tx.Initiator,
-		ReceivedTimestamp: tx.ReceivedTimestamp,
-	}
-	for _, input := range tx.TxInputs {
-		t.TxInputs = append(t.TxInputs, TxInput{
-			RefTxid:   input.RefTxid,
-			RefOffset: input.RefOffset,
-			FromAddr:  string(input.FromAddr),
-			Amount:    FromAmountBytes(input.Amount),
-		})
-	}
-	for _, output := range tx.TxOutputs {
-		t.TxOutputs = append(t.TxOutputs, TxOutput{
-			Amount: FromAmountBytes(output.Amount),
-			ToAddr: string(output.ToAddr),
-		})
-	}
-	for _, inputExt := range tx.TxInputsExt {
-		t.TxInputsExt = append(t.TxInputsExt, TxInputExt{
-			Bucket:    inputExt.Bucket,
-			Key:       string(inputExt.Key),
-			RefTxid:   inputExt.RefTxid,
-			RefOffset: inputExt.RefOffset,
-		})
-	}
-	for _, outputExt := range tx.TxOutputsExt {
-		t.TxOutputsExt = append(t.TxOutputsExt, TxOutputExt{
-			Bucket: outputExt.Bucket,
-			Key:    string(outputExt.Key),
-			Value:  string(outputExt.Value),
-		})
-	}
-	if tx.ContractRequests != nil {
-		for i := 0; i < len(tx.ContractRequests); i++ {
-			req := tx.ContractRequests[i]
-			tmpReq := &InvokeRequest{
-				ModuleName:   req.ModuleName,
-				ContractName: req.ContractName,
-				MethodName:   req.MethodName,
-				Args:         map[string]string{},
-			}
-			for argKey, argV := range req.Args {
-				tmpReq.Args[argKey] = string(argV)
-			}
-			for _, rlimit := range req.ResourceLimits {
-				resource := ResourceLimit{
-					Type:  rlimit.Type.String(),
-					Limit: rlimit.Limit,
-				}
-				tmpReq.ResouceLimits = append(tmpReq.ResouceLimits, resource)
-			}
-			t.ContractRequests = append(t.ContractRequests, tmpReq)
-		}
-	}
-
-	t.AuthRequire = append(t.AuthRequire, tx.AuthRequire...)
-
-	for _, initsign := range tx.InitiatorSigns {
-		t.InitiatorSigns = append(t.InitiatorSigns, SignatureInfo{
-			PublicKey: initsign.PublicKey,
-			Sign:      initsign.Sign,
-		})
-	}
-
-	for _, authSign := range tx.AuthRequireSigns {
-		t.AuthRequireSigns = append(t.AuthRequireSigns, SignatureInfo{
-			PublicKey: authSign.PublicKey,
-			Sign:      authSign.Sign,
-		})
-	}
-
-	//if tx.ModifyBlock != nil {
-	//	t.ModifyBlock = ModifyBlock{
-	//		EffectiveHeight: tx.ModifyBlock.EffectiveHeight,
-	//		Marked:          tx.ModifyBlock.Marked,
-	//		EffectiveTxid:   tx.ModifyBlock.EffectiveTxid,
-	//	}
-	//}
-	return t
-}
-
 //精简了获取的交易数据，在获取状态的时候，尽可能的取消不必要的操作
 func FromPBTx(tx *pb.Transaction) *Transaction {
 	t := &Transaction{
@@ -246,6 +160,8 @@ type InternalBlock struct {
 	CurTerm      int64             `json:"curTerm,omitempty"`
 	CurBlockNum  int64             `json:"curBlockNum,omitempty"`
 	Justify      *QuorumCert       `json:"justify,omitempty"`
+	Nonce        int32             `json:"nonce,omitempty"`
+	TargetBits   int32             `json:"targetBits,omitempty"`
 }
 
 func FromInternalBlockPB(block *pb.InternalBlock) *InternalBlock {
@@ -260,11 +176,13 @@ func FromInternalBlockPB(block *pb.InternalBlock) *InternalBlock {
 		Height:    block.Height,
 		Timestamp: block.Timestamp,
 		TxCount:   block.TxCount,
-		//InTrunk:     block.InTrunk,
+		InTrunk:   block.InTrunk,
 		//NextHash:    block.NextHash,
 		//FailedTxs:   block.FailedTxs,
 		//CurTerm:     block.CurTerm,
 		//CurBlockNum: block.CurBlockNum,
+		Nonce:      block.Nonce,
+		TargetBits: block.TargetBits,
 	}
 	//iblock.MerkleTree = make([]HexID, len(block.MerkleTree))
 	//for i := range block.MerkleTree {
@@ -316,6 +234,7 @@ type UtxoMeta struct {
 	ReservedContracts        []InvokeRequest `json:"reservedContracts,omitempty"`
 	ForbiddenContract        InvokeRequest   `json:"forbiddenContract,omitempty"`
 	NewAccountResourceAmount int64           `json:"newAccountResourceAmount,omitempty"`
+	TransferFeeAmount        int64           `json:"transfer_fee_amount,omitempty"`
 	IrreversibleBlockHeight  int64           `json:"irreversibleBlockHeight,omitempty"`
 	IrreversibleSlideWindow  int64           `json:"irreversibleSlideWindow,omitempty"`
 	GasPrice                 GasPrice        `json:"gasPrice,omitempty"`
@@ -327,17 +246,17 @@ type ContractStatData struct {
 }
 
 type ChainStatus struct {
-	Name       string     `json:"name,omitempty"`
-	LedgerMeta LedgerMeta `json:"ledger,omitempty"`
-	//UtxoMeta   UtxoMeta   `json:"utxo,omitempty"`
-	BranchBlockid []string       `json:"branchBlockid,omitempty"`
+	Name          string         `json:"name,omitempty"`
+	LedgerMeta    LedgerMeta     `json:"ledger,omitempty"`
+	//UtxoMeta      UtxoMeta       `json:"utxo,omitempty"`
+	//BranchBlockid []string       `json:"branchBlockid,omitempty"`
 	Block         *InternalBlock `json:"block,omitempty"` //增加区块数据
 }
 
 type SystemStatus struct {
 	ChainStatus []ChainStatus `json:"blockchains,omitempty"`
 	Peers       []string      `json:"peers,omitempty"`
-	Speeds      *pb.Speeds    `json:"speeds,omitempty"`
+	//Speeds      *pb.Speeds    `json:"speeds,omitempty"`
 }
 
 func FromSystemStatusPB(statuspb *pb.SystemsStatus) *SystemStatus {
@@ -397,15 +316,16 @@ func FromSystemStatusPB(statuspb *pb.SystemsStatus) *SystemStatus {
 			//	UnconfirmTxAmount:        utxoMeta.GetUnconfirmTxAmount(),
 			//	MaxBlockSize:             utxoMeta.GetMaxBlockSize(),
 			//	NewAccountResourceAmount: utxoMeta.GetNewAccountResourceAmount(),
+			//	TransferFeeAmount:        utxoMeta.GetTransferFeeAmount(),
 			//	ReservedContracts:        rcs,
 			//	ForbiddenContract:        forbiddenContractMap,
-			//	IrreversibleBlockHeight: utxoMeta.GetIrreversibleBlockHeight(),
-			//	IrreversibleSlideWindow: utxoMeta.GetIrreversibleSlideWindow(),
-			//	GasPrice: gasPrice,
+			//	IrreversibleBlockHeight:  utxoMeta.GetIrreversibleBlockHeight(),
+			//	IrreversibleSlideWindow:  utxoMeta.GetIrreversibleSlideWindow(),
+			//	GasPrice:                 gasPrice,
 			//},
 
 			//BranchBlockid: chain.GetBranchBlockid(),
-			Block: FromInternalBlockPB(block),
+			Block:         FromInternalBlockPB(block),
 		})
 	}
 	status.Peers = statuspb.GetPeerUrls()
@@ -531,4 +451,132 @@ func SimpleBlocks(blocks []*pb.InternalBlock) []*InternalBlock {
 		tempBlocks = append(tempBlocks, block)
 	}
 	return tempBlocks
+}
+
+func FullTx(tx *pb.Transaction) *Transaction {
+	t := &Transaction{
+		Txid:              tx.Txid,
+		Blockid:           tx.Blockid,
+		Nonce:             tx.Nonce,
+		Timestamp:         tx.Timestamp,
+		Version:           tx.Version,
+		Desc:              string(tx.Desc),
+		Autogen:           tx.Autogen,
+		Coinbase:          tx.Coinbase,
+		VoteCoinbase:      tx.VoteCoinbase,
+		Initiator:         tx.Initiator,
+		ReceivedTimestamp: tx.ReceivedTimestamp,
+	}
+	for _, input := range tx.TxInputs {
+		t.TxInputs = append(t.TxInputs, TxInput{
+			RefTxid:   input.RefTxid,
+			RefOffset: input.RefOffset,
+			FromAddr:  string(input.FromAddr),
+			Amount:    FromAmountBytes(input.Amount),
+		})
+	}
+	for _, output := range tx.TxOutputs {
+		t.TxOutputs = append(t.TxOutputs, TxOutput{
+			Amount: FromAmountBytes(output.Amount),
+			ToAddr: string(output.ToAddr),
+		})
+	}
+	for _, inputExt := range tx.TxInputsExt {
+		t.TxInputsExt = append(t.TxInputsExt, TxInputExt{
+			Bucket:    inputExt.Bucket,
+			Key:       string(inputExt.Key),
+			RefTxid:   inputExt.RefTxid,
+			RefOffset: inputExt.RefOffset,
+		})
+	}
+	for _, outputExt := range tx.TxOutputsExt {
+		v := string(outputExt.Value)
+		if len(v) > 30 {
+			v = "value too long"
+		}
+		t.TxOutputsExt = append(t.TxOutputsExt, TxOutputExt{
+			Bucket: outputExt.Bucket,
+			Key:    string(outputExt.Key),
+			Value:  v,
+		})
+	}
+	if tx.ContractRequests != nil {
+		for i := 0; i < len(tx.ContractRequests); i++ {
+			req := tx.ContractRequests[i]
+			tmpReq := &InvokeRequest{
+				ModuleName:   req.ModuleName,
+				ContractName: req.ContractName,
+				MethodName:   req.MethodName,
+				Args:         map[string]string{},
+			}
+			for argKey, argV := range req.Args {
+				v := string(argV)
+				if len(argV) > 30 {
+					v = "value too long"
+				}
+				tmpReq.Args[argKey] = v
+			}
+			for _, rlimit := range req.ResourceLimits {
+				resource := ResourceLimit{
+					Type:  rlimit.Type.String(),
+					Limit: rlimit.Limit,
+				}
+				tmpReq.ResouceLimits = append(tmpReq.ResouceLimits, resource)
+			}
+			t.ContractRequests = append(t.ContractRequests, tmpReq)
+		}
+	}
+
+	t.AuthRequire = append(t.AuthRequire, tx.AuthRequire...)
+
+	for _, initsign := range tx.InitiatorSigns {
+		t.InitiatorSigns = append(t.InitiatorSigns, SignatureInfo{
+			PublicKey: initsign.PublicKey,
+			Sign:      initsign.Sign,
+		})
+	}
+
+	for _, authSign := range tx.AuthRequireSigns {
+		t.AuthRequireSigns = append(t.AuthRequireSigns, SignatureInfo{
+			PublicKey: authSign.PublicKey,
+			Sign:      authSign.Sign,
+		})
+	}
+
+	//if tx.ModifyBlock != nil {
+	//	t.ModifyBlock = ModifyBlock{
+	//		EffectiveHeight: tx.ModifyBlock.EffectiveHeight,
+	//		Marked:          tx.ModifyBlock.Marked,
+	//		EffectiveTxid:   tx.ModifyBlock.EffectiveTxid,
+	//	}
+	//}
+	return t
+}
+
+func SumHash(tx *pb.Transaction) error {
+	j, err := json.Marshal(tx)
+	if err != nil {
+		return err
+	}
+	fmt.Println("md5:", md5.Sum(j))
+	fmt.Println("sha1:", sha1.Sum(j))
+	fmt.Println("sha256:", sha256.Sum256(j))
+
+	txid, err := txhash.MakeTransactionID(tx)
+	if err != nil {
+		return err
+	}
+	fmt.Println("txid:", hex.EncodeToString(txid))
+	return nil
+}
+
+func PrintTx(tx *pb.Transaction) error {
+	// print tx
+	t := FullTx(tx)
+	output, err := json.MarshalIndent(t, "", "  ")
+	if err != nil {
+		return err
+	}
+	fmt.Println(string(output))
+	return nil
 }

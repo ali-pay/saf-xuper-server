@@ -4,7 +4,7 @@ import (
 	"sync"
 
 	"github.com/jason-cn-dev/xupercc/conf"
-	"github.com/jason-cn-dev/xupercc/controllers"
+	"github.com/jason-cn-dev/xupercc/utils"
 )
 
 var (
@@ -15,8 +15,8 @@ var (
 type QueryList struct {
 	node   string
 	bcname string
-	blocks []*controllers.InternalBlock
-	txs    []*controllers.Transaction
+	blocks []*utils.InternalBlock
+	txs    []*utils.Transaction
 	lock   *sync.RWMutex
 }
 
@@ -24,19 +24,19 @@ func NewQueryList(node, bcname string) *QueryList {
 	return &QueryList{
 		node:   node,
 		bcname: bcname,
-		blocks: make([]*controllers.InternalBlock, size),
-		txs:    make([]*controllers.Transaction, size),
+		blocks: make([]*utils.InternalBlock, size),
+		txs:    make([]*utils.Transaction, size),
 		lock:   new(sync.RWMutex),
 	}
 }
 
-func (this *QueryList) AddBlock(blocks []*controllers.InternalBlock) {
+func (this *QueryList) AddBlock(blocks []*utils.InternalBlock) {
 	this.lock.Lock()
 	defer this.lock.Unlock()
 	this.blocks = append(blocks, this.blocks[:size-len(blocks)]...)
 }
 
-func (this *QueryList) GetBlocks() []*controllers.InternalBlock {
+func (this *QueryList) GetBlocks() []*utils.InternalBlock {
 	this.lock.RLock()
 	defer this.lock.RUnlock()
 	return this.blocks
@@ -55,14 +55,14 @@ func (this *QueryList) IsNew(height int64) int64 {
 	return diff
 }
 
-func (this *QueryList) AddTx(txs []*controllers.Transaction) {
+func (this *QueryList) AddTx(txs []*utils.Transaction) {
 	this.lock.Lock()
 	defer this.lock.Unlock()
 	this.txs = append(txs, this.txs[:size-len(txs)]...)
 
 }
 
-func (this *QueryList) GetTxs() []*controllers.Transaction {
+func (this *QueryList) GetTxs() []*utils.Transaction {
 	this.lock.RLock()
 	defer this.lock.RUnlock()
 	return this.txs
