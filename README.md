@@ -1,3 +1,9 @@
+# 如果编译发生错误
+
+**1. jason-cn-dev：将该字段改成：ali-pay**
+
+**2. xupercc：将该字段改成：saf-xuper-server**
+
 # 超级链的后端
 
 ## [查看API文档](超级链API文档_v0629.md)
